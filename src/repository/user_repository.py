@@ -14,7 +14,6 @@ def delete_user(user_id: int):
     db.session.delete(user)
     db.session.commit()
 
-    return 'User deleted successfully!'
 
 def add_user(name: str, age: int, gender: str, height: float, weight: float, user_user_id: int) -> User:
     user = db.session.query(User).get(user_user_id)

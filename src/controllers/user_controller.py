@@ -3,7 +3,7 @@ from sqlalchemy.exc import IntegrityError, OperationalError
 from sqlalchemy.orm.exc import UnmappedInstanceError
 from ..repository.user_repository import get_user, get_users, add_user, update_user, delete_user, select_user
 
-responde_fields ={
+response_fields ={
     "user_id": fields.Integer,
     "name": fields.String,
     "age": fields.Integer,
@@ -20,7 +20,7 @@ request_parser.add_argument("height", type=float, help="", required=True)
 request_parser.add_argument("weight", type=float, help="", required=True)
 
 class UserItem(Resource):
-    @marshal_with(responde_fields)
+    @marshal_with(response_fields)
     def get(self, user_id):
         try:
             user = get_user(user_id)
@@ -39,7 +39,7 @@ class UserItem(Resource):
         except:
             abort(500, message = "Internal Server Error")
     
-    @marshal_with(responde_fields)
+    @marshal_with(response_fields)
     def put(self, user_id):
         try:
             args = request_parser.parse_args(strict=True)
@@ -49,7 +49,7 @@ class UserItem(Resource):
             abort(500, message = "Internal Server Error")
 
 class UserList(Resource):
-    @marshal_with(responde_fields)
+    @marshal_with(response_fields)
     def get(self):
         try:
             if request.args:
@@ -59,7 +59,7 @@ class UserList(Resource):
         except OperationalError:
             abort(500, message = "Internal Server Error")
 
-    @marshal_with(responde_fields)
+    @marshal_with(response_fields)
     def post(self):
         try:
             args = request_parser.parse_args(strict=True)
