@@ -15,20 +15,15 @@ def delete_user_exercise(user_exercises_id: int):
     db.session.delete(user_exercise)
     db.session.commit()
 
+    return "Delatado com sucesso"
 
-def add_user_exercise(id_user: int, id_exercise: int, date_str: str, duration: float, weight:float, repetitions:int, user_exercises_id: int) -> User_Exercises:
-    user_exercise = db.session.query(User_Exercises).get(user_exercises_id)
 
-    date = datetime.strptime(date_str, "%Y-%m-%d")
-
-    user_exercise.id_user = id_user
-    user_exercise.id_exercise = id_exercise
-    user_exercise.date = date
-    user_exercise.duration = duration
-    user_exercise.weight = weight
-    user_exercise.repetitions = repetitions
-
+def add_user_exercise(id_user: int, id_exercise: int, date: datetime, duration: float, weight:float, repetitions:int) -> User_Exercises:
+    
+    user_exercise = User_Exercises(id_user=id_user, id_exercise=id_exercise, date=date, duration=duration, weight=weight, repetitions=repetitions)
+    db.session.add(user_exercise)
     db.session.commit()
+    return user_exercise
     
 def update_user_exercise(id_user: int, id_exercise: int, date_str: str, duration: float, weight:float, repetitions:int, user_exercises_id: int) -> User_Exercises:
     user_exercise = db.session.query(User_Exercises).get(user_exercises_id)

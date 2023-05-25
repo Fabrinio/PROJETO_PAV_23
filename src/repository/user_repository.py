@@ -13,18 +13,16 @@ def delete_user(user_id: int):
     user = db.session.query(User).get(user_id)
     db.session.delete(user)
     db.session.commit()
+    return "Delatado com sucesso"
 
 
-def add_user(name: str, age: int, gender: str, height: float, weight: float, user_user_id: int) -> User:
-    user = db.session.query(User).get(user_user_id)
+def add_user(name: str, age: int, gender: str, height: float, weight: float) -> User:
+    
 
-    user.name = name
-    user.age = age
-    user.gender = gender
-    user.height = height
-    user.weight = weight
-
+    user = User(name=name, age=age, gender=gender, height=height, weight=weight)
+    db.session.add(user)
     db.session.commit()
+    return user
     
 def update_user(name: str, age: int, gender: str, height: float, weight: float, user_id: int) -> User:
     user = db.session.query(User).get(user_id)

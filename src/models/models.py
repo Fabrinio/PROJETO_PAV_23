@@ -64,10 +64,10 @@ class User_Exercises(Base):
     user = relationship("User", back_populates="user_exercises")
     exercise = relationship("Exercises", back_populates="user_exercises")
 
-    def __init__(self, id_user, id_exercises, date, duration, weight, repetitions):
+    def __init__(self, id_user, id_exercise, date, duration, weight, repetitions):
 
         self.id_user = id_user
-        self.id_exercises = id_exercises
+        self.id_exercise = id_exercise
         self.date = date
         self.duration = duration
         self.weight = weight

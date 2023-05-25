@@ -13,17 +13,15 @@ def delete_exercise(exercise_id: int):
     exercise = db.session.query(Exercises).get(exercise_id)
     db.session.delete(exercise)
     db.session.commit()
+    return "Delatado com sucesso"
 
 
-def add_exercise(name: str, description: str, dificulty: int, muscular_groups: str, exercise_id: int) -> Exercises:
-    exercise = db.session.query(Exercises).get(exercise_id)
-
-    exercise.name = name
-    exercise.description = description
-    exercise.dificulty = dificulty
-    exercise.muscular_groups = muscular_groups
-
+def add_exercise(name: str, description: str, dificulty: int, muscular_groups: str) -> Exercises:
+    
+    exercise = Exercises(name=name, description=description, dificulty=dificulty, muscular_groups=muscular_groups)
+    db.session.add(exercise)
     db.session.commit()
+    return exercise
     
 def update_exercise(name: str, description: str, dificulty: int, muscular_groups: str, exercise_id: int) -> Exercises:
     exercise = db.session.query(Exercises).get(exercise_id)

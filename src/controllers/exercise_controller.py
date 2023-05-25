@@ -31,7 +31,7 @@ class ExerciseItem(Resource):
     def delete(self, exercise_id):
         try:
             delete_exercise(exercise_id)
-            return "", 204
+            return "Exercício delatado com sucesso.", 204
         except UnmappedInstanceError:
             abort(404, message="Resource not found")
         except:

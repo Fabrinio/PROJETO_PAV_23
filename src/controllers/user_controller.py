@@ -33,7 +33,7 @@ class UserItem(Resource):
     def delete(self, user_id):
         try:
             delete_user(user_id)
-            return "", 204
+            return "Usuário delatado com sucesso.", 204
         except UnmappedInstanceError:
             abort(404, message = "Resource not found")
         except:
