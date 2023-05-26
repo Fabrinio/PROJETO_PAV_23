@@ -1,5 +1,6 @@
 import sqlalchemy
 from ..models.models import User, db
+from typing import List
 
 def get_users() -> sqlalchemy.orm.query.Query:
     users = db.session.query(User).all()
@@ -37,8 +38,10 @@ def update_user(name: str, age: int, gender: str, height: float, weight: float, 
     
     return user
 
-def  select_user(name: str) -> sqlalchemy.orm.query.Query:
-    print(name)
-    user = db.session.query(User).filter_by(name=name).all()
-    return user
+def select_user(name: str) -> List[User]:
+    users = db.session.query(User).filter_by(name=name).all()
+    return users
+
+
+
 

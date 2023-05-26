@@ -1,5 +1,6 @@
 import sqlalchemy
 from ..models.models import Exercises, db
+from typing import List
 
 def get_exercises() -> sqlalchemy.orm.query.Query:
     exercises = db.session.query(Exercises).all()
@@ -36,7 +37,6 @@ def update_exercise(name: str, description: str, dificulty: int, muscular_groups
     
     return exercise
 
-def  select_exercise(name: str) -> sqlalchemy.orm.query.Query:
-    print(name)
-    exercise = db.session.query(Exercises).filter_by(name=name).all()
-    return exercise
+def select_exercise(name: str) -> List[Exercises]: 
+    exercises = db.session.query(Exercises).filter_by(name=name).all()
+    return exercises

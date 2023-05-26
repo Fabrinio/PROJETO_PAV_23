@@ -50,10 +50,13 @@ class ExerciseList(Resource):
     @marshal_with(response_fields)
     def get(self):
         try:
-            if request.args:
-                select_exercise(request.args.get('[name]'))
+            if 'name' in request.args:
+                name = request.args['name']
+                exercises = select_exercise(name)
+                return exercises, 200
             else:
-                return get_exercises(), 200
+                exercises = get_exercises()
+                return exercises, 200
         except OperationalError:
             abort(500, message="Internal Server Error")
 

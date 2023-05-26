@@ -52,12 +52,15 @@ class UserList(Resource):
     @marshal_with(response_fields)
     def get(self):
         try:
-            if request.args:
-                select_user(request.args(['name']))
+            if 'name' in request.args:
+                name = request.args['name']
+                users = select_user(name)
+                return users, 200
             else:
-                return get_users(), 200
+                users = get_users()
+                return users, 200
         except OperationalError:
-            abort(500, message = "Internal Server Error")
+            abort(500, message="Internal Server Error")
 
     @marshal_with(response_fields)
     def post(self):
