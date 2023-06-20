@@ -45,10 +45,13 @@ class User_ExerciseItem(Resource):
     def put(self, user_exercises_id):
         try:
             args = request_parser.parse_args(strict=True)
-            user_exercise = update_user_exercise(**args, user_exercises_id=user_exercises_id)
+            # Remova o argumento 'date' do dicionário 'args'
+            date = args.pop('date', None)
+            user_exercise = update_user_exercise(date_str=date, user_exercises_id=user_exercises_id, **args)
             return user_exercise, 200
-        except(OperationalError, IntegrityError):
-            abort(500, message = "Internal Server Error")
+        except (OperationalError, IntegrityError):
+            abort(500, message="Internal Server Error")
+
 
 class User_ExerciseList(Resource):
     @marshal_with(response_fields)

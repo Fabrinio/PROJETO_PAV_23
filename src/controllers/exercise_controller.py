@@ -35,7 +35,7 @@ class ExerciseItem(Resource):
         except UnmappedInstanceError:
             abort(404, message="Resource not found")
         except:
-            abort(500, message="Internal Server Error")
+            abort(500, message="message")
 
     @marshal_with(response_fields)
     def put(self, exercise_id):
